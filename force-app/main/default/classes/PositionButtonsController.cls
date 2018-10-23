@@ -1,6 +1,8 @@
 public class PositionButtonsController {
     
-    public static Position__c position = [SELECT Id, Post_Status__c, Approval_Status__c, Status__c FROM Position__c WHERE Id =: ApexPages.CurrentPage().getparameters().get('Id')];
+    public static Position__c position = [SELECT Id, Post_Status__c, Approval_Status__c, Status__c
+                                          FROM Position__c
+                                          WHERE Id =: ApexPages.CurrentPage().getparameters().get('Id')];
     public static String positionStatus{get;set;}
     public static String successResultMessage{get;set;}
     public static String errorResultMessage{get;set;}

@@ -8,21 +8,6 @@ private class CalloutJobAdvertisementTest {
     }
     
     static String insertAccessTokenBody(){  //Токен-данные
-        /*Settings__c settings = new Settings__c(Name = 'OurSettings',
-                               				   ConsumerKey__c = '234234234',
-                               				   ClientSecret__c = '678678678',
-                               				   Username__c = 'mail@mail.com',
-                               				   SecurityToken__c = '12312321213',
-                               				   Password__c = 'mypassword1');
-        insert settings;
-        
-        String consumerKey = settings.ConsumerKey__c;
-		String consumerSecret = settings.ClientSecret__c;
-		String username = settings.Username__c;
-		String password = settings.Password__c + settings.SecurityToken__c;
-    	String request = 'grant_type=password&client_id=' + consumerKey +'&client_secret=' + consumerSecret +
-            			 '&username=' + username + '&password='+password;*/
-        
         String consumerKey = '234234234';
 		String consumerSecret = '678678678';
 		String username = 'mail@mail.com';
@@ -208,6 +193,7 @@ private class CalloutJobAdvertisementTest {
         
         Test.startTest(); 
  		HttpResponse response = CalloutJobAdvertisement.putCalloutResponseContents(testPosition.Id);
+        //CalloutJobAdvertisementHelper.changeStatusCallout(testPosition.Id);   ----->    Прописать респонс
         Test.stopTest();
         
  		String contentType = response.getHeader('Content-Type');

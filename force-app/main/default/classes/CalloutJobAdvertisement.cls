@@ -1,20 +1,28 @@
 public class CalloutJobAdvertisement {
     public class ResponseException extends Exception {}
-    public static Position__c ourPosition{get;set;}
+    
+    static String consumerKey = '3MVG9zlTNB8o8BA0XTN2CO6T58S141MYGoKwpPNaqqNeDih8dq05nznO1uhv0d_wri59hb1dhe1oqyTNKtg_m';
+	static String consumerSecret = '3281958042781871073';
+	static String username = 'yagamiraito765@gmail.com';
+	static String password = 'mypassword1sOQZsZi0SDkBm8rAn2bRgzja';
+    static String request = 'grant_type=password&client_id=' + consumerKey +'&client_secret=' + consumerSecret +
+        							'&username=' + username + '&password=' + password;
     
     public static String accessTokenBody(){  //Токен-данные
-        String consumerKey = '3MVG9zlTNB8o8BA0XTN2CO6T58S141MYGoKwpPNaqqNeDih8dq05nznO1uhv0d_wri59hb1dhe1oqyTNKtg_m';
-		String consumerSecret = '3281958042781871073';
-		String username = 'yagamiraito765@gmail.com';
-		String password = 'mypassword1sOQZsZi0SDkBm8rAn2bRgzja';
-    	String request = 'grant_type=password&client_id=' + consumerKey +'&client_secret=' + consumerSecret +
-            			 '&username=' + username + '&password=' + password;
+        String requestBody = request;
         return request;
     }
     
     public class OAuth2{
  		public String ACCESS_TOKEN{get;set;}    
 	}
+    
+    public static Position__c getPosition(Id positionId){
+        Position__c ourPosition = [SELECT Id, Name, Location__c, Job_Description__c, Salary_Range__c, Skills_Required__c, Education__c,
+                     	   		   Hiring_Manager__r.Name, Email__c, Phone__c
+                     	   		   FROM Position__c WHERE Id =: positionId];
+        return ourPosition;
+    }
     
     public static HttpRequest httpRequest(String service){
         String requestBody = accessTokenBody();
@@ -44,7 +52,8 @@ public class CalloutJobAdvertisement {
 			'Manager_Name__c' => pos.Hiring_Manager__r.Name,
 			'Email__c' => pos.Email__c,
 			'Phone__c' => pos.Phone__c,
-			'Position_ID__c' => pos.Id};       
+			'Position_ID__c' => pos.Id
+             };       
         String serialized = JSON.serialize(fieldMap);         
         return serialized;
      }
@@ -68,16 +77,14 @@ public class CalloutJobAdvertisement {
         throw new ResponseException('Access Token is null.');
     }
     
-    public static HttpResponse postCalloutResponseContents(String positionId) {  //'a0A1r00002vIrEVEA0'
+    public static HttpResponse postCalloutResponseContents(Id positionId) {  //'a0A1r00002vIrEVEA0'
         Http ourHttp = new Http();
         HttpRequest request = httpRequest('POST'); 
         HttpResponse response = ourHttp.send(request);      
         OAuth2 objAuthenticationInfo = (OAuth2)JSON.deserialize(response.getbody(), OAuth2.class);
 
 		if(objAuthenticationInfo.ACCESS_TOKEN != null){
-            Position__c ourPosition = [SELECT Id, Name, Location__c, Job_Description__c, Salary_Range__c, Skills_Required__c, Education__c,
-                     	   			   Hiring_Manager__r.Name, Email__c, Phone__c, Status__c
-                     	   			   FROM Position__c WHERE Id =: positionId];
+            Position__c ourPosition = getPosition(positionId);
             HttpRequest finalRequest = finalHttpRequest(objAuthenticationInfo.ACCESS_TOKEN, 'POST', '');
             finalRequest.setBody(GenerateJSON(ourPosition));
             HttpResponse finalResponse = ourHttp.send(finalRequest);
@@ -98,9 +105,7 @@ public class CalloutJobAdvertisement {
         OAuth2 objAuthenticationInfo = (OAuth2)JSON.deserialize(response.getbody(), OAuth2.class);
 
 		if(objAuthenticationInfo.ACCESS_TOKEN != null){
-            ourPosition = [SELECT Id, Name, Location__c, Job_Description__c, Salary_Range__c, Skills_Required__c, Education__c,
-                     Hiring_Manager__r.Name, Email__c, Phone__c, Status__c
-                     FROM Position__c WHERE Id =: positionId];
+            Position__c ourPosition = getPosition(positionId);
             HttpRequest finalRequest = finalHttpRequest(objAuthenticationInfo.ACCESS_TOKEN, 'DELETE', ourPosition.Id);
             finalRequest.setBody(GenerateJSON(ourPosition));
             System.debug('Job Advertisement BEFORE DELETION:  ' + GenerateJSON(ourPosition));
@@ -122,9 +127,7 @@ public class CalloutJobAdvertisement {
         OAuth2 objAuthenticationInfo = (OAuth2)JSON.deserialize(response.getbody(), OAuth2.class);
 
 		if(objAuthenticationInfo.ACCESS_TOKEN != null){
-            ourPosition = [SELECT Id, Name, Location__c, Job_Description__c, Salary_Range__c, Skills_Required__c, Education__c,
-                     Hiring_Manager__r.Name, Email__c, Phone__c, Status__c
-                     FROM Position__c WHERE Id =: positionId];
+            Position__c ourPosition = getPosition(positionId);
             HttpRequest finalRequest = finalHttpRequest(objAuthenticationInfo.ACCESS_TOKEN, 'POST', ourPosition.Id + '?_HttpMethod=PATCH');
             finalRequest.setBody(GenerateJSON(ourPosition));
             System.debug('Job Advertisement TO CHANGE:  ' + GenerateJSON(ourPosition));
