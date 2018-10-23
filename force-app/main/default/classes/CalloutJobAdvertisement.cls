@@ -3,16 +3,6 @@ public class CalloutJobAdvertisement {
     public static Position__c ourPosition{get;set;}
     
     public static String accessTokenBody(){  //Токен-данные
-        /*Settings__c settings = [SELECT ConsumerKey__c, ClientSecret__c, Username__c, Password__c, SecurityToken__c
-                                FROM Settings__c
-                                WHERE Name = 'OurSettings'];
-        String consumerKey = settings.ConsumerKey__c;
-		String consumerSecret = settings.ClientSecret__c;
-		String username = settings.Username__c;
-		String password = settings.Password__c + settings.SecurityToken__c;
-    	String request = 'grant_type=password&client_id=' + consumerKey +'&client_secret=' + consumerSecret +
-            			 '&username=' + username + '&password=' + password;*/
-        
         String consumerKey = '3MVG9zlTNB8o8BA0XTN2CO6T58S141MYGoKwpPNaqqNeDih8dq05nznO1uhv0d_wri59hb1dhe1oqyTNKtg_m';
 		String consumerSecret = '3281958042781871073';
 		String username = 'yagamiraito765@gmail.com';

@@ -7,15 +7,6 @@
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
         <label>Photo</label>
-        <layoutColumns>
-            <layoutItems>
-                <height>250</height>
-                <page>UploadCandidatePhotoVF</page>
-                <showLabel>false</showLabel>
-                <showScrollbars>true</showScrollbars>
-                <width>100%</width>
-            </layoutItems>
-        </layoutColumns>
         <style>OneColumn</style>
     </layoutSections>
     <layoutSections>
@@ -159,11 +150,6 @@
     <platformActionList>
         <actionListContext>Record</actionListContext>
         <platformActionListItems>
-            <actionName>Candidate__c.PDF_File</actionName>
-            <actionType>QuickAction</actionType>
-            <sortOrder>0</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
             <actionName>Candidate__c.New_Job_App</actionName>
             <actionType>QuickAction</actionType>
             <sortOrder>1</sortOrder>
@@ -270,9 +256,6 @@
         </platformActionListItems>
     </platformActionList>
     <quickActionList>
-        <quickActionListItems>
-            <quickActionName>Candidate__c.PDF_File</quickActionName>
-        </quickActionListItems>
         <quickActionListItems>
             <quickActionName>FeedItem.TextPost</quickActionName>
         </quickActionListItems>
