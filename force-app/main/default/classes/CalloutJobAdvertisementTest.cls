@@ -52,6 +52,7 @@ private class CalloutJobAdvertisementTest {
 		} catch(CalloutJobAdvertisement.ResponseException e) {
             System.debug('ERROR 200:   ' + e);
             System.assertEquals(response, null);
+            System.assertEquals('Status code is not 200.', e.getMessage());
 		}
 	}
     
@@ -65,9 +66,11 @@ private class CalloutJobAdvertisementTest {
             Test.startTest();
   			response = CalloutJobAdvertisement.getCalloutResponseContents();
             Test.stopTest();
+            System.assertEquals(200, response.getStatusCode());
 		} catch(CalloutJobAdvertisement.ResponseException e) {
             System.debug('TOKEN ERROR:   ' + e);
             System.assertEquals(response, null);
+            System.assertEquals('Access Token is null.', e.getMessage());
 		}
 	}
         
@@ -104,9 +107,11 @@ private class CalloutJobAdvertisementTest {
             Test.startTest();
   			response = CalloutJobAdvertisement.postCalloutResponseContents(testPosition.Id);
             Test.stopTest();
+            System.assertEquals(500, response.getStatusCode());
 		} catch(CalloutJobAdvertisement.ResponseException e) {
             System.debug('ERROR 200:   ' + e);
             System.assertEquals(response, null);
+            System.assertEquals('Status code is not 200.', e.getMessage());
 		}
 	}
     
@@ -121,9 +126,11 @@ private class CalloutJobAdvertisementTest {
             Test.startTest();
   			response = CalloutJobAdvertisement.postCalloutResponseContents(testPosition.Id);
             Test.stopTest();
+            System.assertEquals(200, response.getStatusCode());
 		} catch(CalloutJobAdvertisement.ResponseException e) {
             System.debug('TOKEN ERROR:   ' + e);
             System.assertEquals(response, null);
+            System.assertEquals('Access Token is null.', e.getMessage());
 		}
 	}
     
@@ -160,9 +167,11 @@ private class CalloutJobAdvertisementTest {
             Test.startTest(); 
   			response = CalloutJobAdvertisement.deleteCalloutResponseContents(testPosition.Id);
             Test.stopTest();
+            System.assertEquals(500, response.getStatusCode());
 		} catch(CalloutJobAdvertisement.ResponseException e) {
             System.debug('ERROR 200:   ' + e);
             System.assertEquals(response, null);
+            System.assertEquals('Status code is not 200.', e.getMessage());
 		}
 	}
     
@@ -177,9 +186,11 @@ private class CalloutJobAdvertisementTest {
             Test.startTest();
   			response = CalloutJobAdvertisement.deleteCalloutResponseContents(testPosition.Id);
             Test.stopTest();
+            System.assertEquals(200, response.getStatusCode());
 		} catch(CalloutJobAdvertisement.ResponseException e) {
             System.debug('TOKEN ERROR:   ' + e);
             System.assertEquals(response, null);
+            System.assertEquals('Access Token is null.', e.getMessage());
 		} 
 	}
     
@@ -193,7 +204,6 @@ private class CalloutJobAdvertisementTest {
         
         Test.startTest(); 
  		HttpResponse response = CalloutJobAdvertisement.putCalloutResponseContents(testPosition.Id);
-        //CalloutJobAdvertisementHelper.changeStatusCallout(testPosition.Id);   ----->    Прописать респонс
         Test.stopTest();
         
  		String contentType = response.getHeader('Content-Type');
@@ -217,9 +227,11 @@ private class CalloutJobAdvertisementTest {
             Test.startTest(); 
   			response = CalloutJobAdvertisement.putCalloutResponseContents(testPosition.Id);
             Test.stopTest();
+            System.assertEquals(500, response.getStatusCode());
 		} catch(CalloutJobAdvertisement.ResponseException e) {
             System.debug('ERROR 200:   ' + e);
             System.assertEquals(response, null);
+            System.assertEquals('Status code is not 200.', e.getMessage());
 		}
 	}
     
@@ -234,9 +246,80 @@ private class CalloutJobAdvertisementTest {
             Test.startTest();
   			response = CalloutJobAdvertisement.putCalloutResponseContents(testPosition.Id);
             Test.stopTest();
+            System.assertEquals(200, response.getStatusCode());
 		} catch(CalloutJobAdvertisement.ResponseException e) {
             System.debug('TOKEN ERROR:   ' + e);
             System.assertEquals(response, null);
+            System.assertEquals('Access Token is null.', e.getMessage());
 		}
 	}
+    
+    //TRIGGER
+    
+    @isTest
+    static void testUpdateStatusTrigger() {
+        String request = insertAccessTokenBody();
+        Position__c testPosition = insertPosition();
+        testPosition.Status__c = 'Closed';
+        update testPosition;
+        Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(200, 'ACCESS_TOKEN'));
+        
+        Test.startTest();
+        CalloutJobAdvertisementHelper.changeStatusCallout(testPosition.Id);
+        Test.stopTest();
+        System.assertEquals(1, Limits.getFutureCalls());//Методы Limits возвращают конкретный предел, напр. кол-во вызовов метода.
+        												//getFutureCalls() возвращает количество future-методов, которые были выполнены (не обязательно завершены). 
+    }
+    
+    @isTest
+    static void testUpdateStatusTriggerNot200() {
+        String request = insertAccessTokenBody();
+        Position__c testPosition = insertPosition();
+        testPosition.Status__c = 'Closed';
+        update testPosition;
+        Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(500, 'ACCESS_TOKEN'));
+        
+        try {
+            Test.startTest();
+  			CalloutJobAdvertisementHelper.changeStatusCallout(testPosition.Id);
+            Test.stopTest();
+		} catch(CalloutJobAdvertisementHelper.HelperResponseException e) {
+            System.debug('ERROR 200:   ' + e);
+            System.assertEquals('Status code is not 200.', e.getMessage());
+		}
+        System.assertEquals(1, Limits.getFutureCalls());
+    }
+    
+    @isTest
+    static void testUpdateStatusTriggerNoToken() {
+        String request = insertAccessTokenBody();
+        Position__c testPosition = insertPosition();
+        testPosition.Status__c = 'Closed';
+        update testPosition;
+        Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(200, 'OTHER_WORDS_HERE'));
+        
+        try {
+            Test.startTest();
+  			CalloutJobAdvertisementHelper.changeStatusCallout(testPosition.Id);
+            Test.stopTest();
+		} catch(CalloutJobAdvertisementHelper.HelperResponseException e) {
+            System.debug('TOKEN ERROR:   ' + e);
+            System.assertEquals('Access Token is null.', e.getMessage());
+		}
+        System.assertEquals(1, Limits.getFutureCalls());
+    }
+    
+    @isTest
+    static void testUpdateStatusTriggerWrongStatus() {
+        String request = insertAccessTokenBody();
+        Position__c testPosition = insertPosition();
+        testPosition.Status__c = 'New';
+        update testPosition;
+        Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(200, 'ACCESS_TOKEN'));
+        
+        Test.startTest();
+        CalloutJobAdvertisementHelper.changeStatusCallout(testPosition.Id);
+        Test.stopTest();
+        System.assertEquals(0, Limits.getFutureCalls());
+    }
 }

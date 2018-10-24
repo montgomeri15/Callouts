@@ -8,7 +8,7 @@ public class CalloutJobAdvertisement {
     static String request = 'grant_type=password&client_id=' + consumerKey +'&client_secret=' + consumerSecret +
         							'&username=' + username + '&password=' + password;
     
-    public static String accessTokenBody(){  //Токен-данные
+    public static String buildAccessTokenBody(){
         String requestBody = request;
         return request;
     }
@@ -24,8 +24,8 @@ public class CalloutJobAdvertisement {
         return ourPosition;
     }
     
-    public static HttpRequest httpRequest(String service){
-        String requestBody = accessTokenBody();
+    public static HttpRequest createRequestForToken(String service){
+        String requestBody = buildAccessTokenBody();
         HttpRequest ourRequest = new HttpRequest();
         ourRequest.setBody(requestBody);
 		ourRequest.setMethod(service);
@@ -33,7 +33,7 @@ public class CalloutJobAdvertisement {
         return ourRequest;
     }
     
-    public static HttpRequest finalHttpRequest(String token, String method, String endpointUrl){
+    public static HttpRequest createRequestForService(String token, String method, String endpointUrl){
 		HttpRequest finalRequest = new HttpRequest();
         finalRequest.setHeader('Authorization','Bearer ' + token);
         finalRequest.setHeader('Content-Type','application/json');
@@ -43,7 +43,7 @@ public class CalloutJobAdvertisement {
 		return finalRequest;
 	}
     
-    public static String GenerateJSON(Position__c pos){
+    public static String generateJSON(Position__c pos){
 		Map<String, String> fieldMap = new Map<String, String>{
 			'Name' => pos.Name,
 			'Description__c' => pos.Job_Description__c,
@@ -60,16 +60,16 @@ public class CalloutJobAdvertisement {
 
     public static HttpResponse getCalloutResponseContents() {      
     	Http ourHttp = new Http();
-        HttpRequest request = httpRequest('GET');  //Создаем HTTP-запрос на отправку токен-данных.
-        HttpResponse response = ourHttp.send(request);  //Отправляем HTTP-запрос и получаем ответ в JSON-формате.
-        OAuth2 objAuthenticationInfo = (OAuth2)JSON.deserialize(response.getbody(), OAuth2.class);
+        HttpRequest requestForToken = createRequestForToken('GET');  //Создаем HTTP-запрос на отправку токен-данных.
+        HttpResponse responseToken = ourHttp.send(requestForToken);  //Отправляем HTTP-запрос и получаем ответ в JSON-формате.
+        OAuth2 objAuthenticationInfo = (OAuth2)JSON.deserialize(responseToken.getbody(), OAuth2.class);
 
 		if(objAuthenticationInfo.ACCESS_TOKEN != null){
-            HttpRequest finalRequest = finalHttpRequest(objAuthenticationInfo.ACCESS_TOKEN, 'GET', '');
-            HttpResponse finalResponse = ourHttp.send(finalRequest);
-            if(finalResponse.getStatusCode() == 200) {
-                System.debug('ALL EXISTING Job Advertisements:  ' + finalResponse.getBody());
-                return finalResponse;
+            HttpRequest requestForService = createRequestForService(objAuthenticationInfo.ACCESS_TOKEN, 'GET', '');
+            HttpResponse responseService = ourHttp.send(requestForService);
+            if(responseService.getStatusCode() == 200) {
+                System.debug('ALL EXISTING Job Advertisements:  ' + responseService.getBody());
+                return responseService;
             }else {
                 throw new ResponseException('Status code is not 200.');
             }
@@ -77,20 +77,20 @@ public class CalloutJobAdvertisement {
         throw new ResponseException('Access Token is null.');
     }
     
-    public static HttpResponse postCalloutResponseContents(Id positionId) {  //'a0A1r00002vIrEVEA0'
+    public static HttpResponse postCalloutResponseContents(Id positionId) {
         Http ourHttp = new Http();
-        HttpRequest request = httpRequest('POST'); 
-        HttpResponse response = ourHttp.send(request);      
-        OAuth2 objAuthenticationInfo = (OAuth2)JSON.deserialize(response.getbody(), OAuth2.class);
+        HttpRequest requestForToken = createRequestForToken('POST'); 
+        HttpResponse responseToken = ourHttp.send(requestForToken);      
+        OAuth2 objAuthenticationInfo = (OAuth2)JSON.deserialize(responseToken.getbody(), OAuth2.class);
 
 		if(objAuthenticationInfo.ACCESS_TOKEN != null){
             Position__c ourPosition = getPosition(positionId);
-            HttpRequest finalRequest = finalHttpRequest(objAuthenticationInfo.ACCESS_TOKEN, 'POST', '');
-            finalRequest.setBody(GenerateJSON(ourPosition));
-            HttpResponse finalResponse = ourHttp.send(finalRequest);
-            if(finalResponse.getStatusCode() == 200) {
-                System.debug('CREATED Job Advertisement:  ' + finalResponse.getBody());
-                return finalResponse;
+            HttpRequest requestForService = createRequestForService(objAuthenticationInfo.ACCESS_TOKEN, 'POST', '');
+            requestForService.setBody(generateJSON(ourPosition));
+            HttpResponse responseService = ourHttp.send(requestForService);
+            if(responseService.getStatusCode() == 200) {
+                System.debug('CREATED Job Advertisement:  ' + responseService.getBody());
+                return responseService;
             }else {
             	throw new ResponseException('Status code is not 200.');
             }
@@ -98,21 +98,21 @@ public class CalloutJobAdvertisement {
         throw new ResponseException('Access Token is null.');
     }
         
-    public static HttpResponse deleteCalloutResponseContents(Id positionId){  //'a0A1r00002vIrEVEA0'
+    public static HttpResponse deleteCalloutResponseContents(Id positionId){
         Http ourHttp = new Http();
-        HttpRequest request = httpRequest('GET');
-    	HttpResponse response = ourHttp.send(request);
-        OAuth2 objAuthenticationInfo = (OAuth2)JSON.deserialize(response.getbody(), OAuth2.class);
+        HttpRequest requestForToken = createRequestForToken('GET');
+    	HttpResponse responseToken = ourHttp.send(requestForToken);
+        OAuth2 objAuthenticationInfo = (OAuth2)JSON.deserialize(responseToken.getbody(), OAuth2.class);
 
 		if(objAuthenticationInfo.ACCESS_TOKEN != null){
             Position__c ourPosition = getPosition(positionId);
-            HttpRequest finalRequest = finalHttpRequest(objAuthenticationInfo.ACCESS_TOKEN, 'DELETE', ourPosition.Id);
-            finalRequest.setBody(GenerateJSON(ourPosition));
-            System.debug('Job Advertisement BEFORE DELETION:  ' + GenerateJSON(ourPosition));
-            HttpResponse finalResponse = ourHttp.send(finalRequest);
-            if(finalResponse.getStatusCode() == 200) {
-                System.debug('NO CONTENT. ' + finalResponse.getBody());
-                return finalResponse;
+            HttpRequest requestForService = createRequestForService(objAuthenticationInfo.ACCESS_TOKEN, 'DELETE', ourPosition.Id);
+            requestForService.setBody(generateJSON(ourPosition));
+            System.debug('Job Advertisement BEFORE DELETION:  ' + generateJSON(ourPosition));
+            HttpResponse responseService = ourHttp.send(requestForService);
+            if(responseService.getStatusCode() == 200) {
+                System.debug('NO CONTENT. ' + responseService.getBody());
+                return responseService;
             }else {
             	throw new ResponseException('Status code is not 200.');
             }
@@ -120,20 +120,20 @@ public class CalloutJobAdvertisement {
         throw new ResponseException('Access Token is null.');
     }
     
-    public static HttpResponse putCalloutResponseContents(Id positionId){  //'a0A1r00002vIrEVEA0'
+    public static HttpResponse putCalloutResponseContents(Id positionId){
         Http ourHttp = new Http();
-        HttpRequest request = httpRequest('GET');
-    	HttpResponse response = ourHttp.send(request);
-        OAuth2 objAuthenticationInfo = (OAuth2)JSON.deserialize(response.getbody(), OAuth2.class);
+        HttpRequest requestForToken = createRequestForToken('GET');
+    	HttpResponse responseToken = ourHttp.send(requestForToken);
+        OAuth2 objAuthenticationInfo = (OAuth2)JSON.deserialize(responseToken.getbody(), OAuth2.class);
 
 		if(objAuthenticationInfo.ACCESS_TOKEN != null){
             Position__c ourPosition = getPosition(positionId);
-            HttpRequest finalRequest = finalHttpRequest(objAuthenticationInfo.ACCESS_TOKEN, 'POST', ourPosition.Id + '?_HttpMethod=PATCH');
-            finalRequest.setBody(GenerateJSON(ourPosition));
-            System.debug('Job Advertisement TO CHANGE:  ' + GenerateJSON(ourPosition));
-            HttpResponse finalResponse = ourHttp.send(finalRequest);
-            if(finalResponse.getStatusCode() == 200) {
-                return finalResponse;
+            HttpRequest requestForService = createRequestForService(objAuthenticationInfo.ACCESS_TOKEN, 'POST', ourPosition.Id + '?_HttpMethod=PATCH');
+            requestForService.setBody(generateJSON(ourPosition));
+            System.debug('Job Advertisement TO CHANGE:  ' + generateJSON(ourPosition));
+            HttpResponse responseService = ourHttp.send(requestForService);
+            if(responseService.getStatusCode() == 200) {
+                return responseService;
             }else {
             	throw new ResponseException('Status code is not 200.');
             }
