@@ -12,13 +12,9 @@ private class PositionButtonsControllerTest {
     @isTest
     static void testPostButton(){
         Position__c testPosition = insertPosition();
-
     	PageReference pageRef = Page.PositionButtonsVF;
         Test.setCurrentPage(pageRef);
         pageRef.getParameters().put('Id', testPosition.Id);
-        ApexPages.StandardController stdController = new ApexPages.StandardController(testPosition);
-        PositionButtonsController buttonsController = new PositionButtonsController(stdController);
-        
         Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(200, 'ACCESS_TOKEN'));
         
         Test.startTest();
@@ -34,13 +30,9 @@ private class PositionButtonsControllerTest {
     @isTest
     static void testPostButtonNot200(){
         Position__c testPosition = insertPosition();
-
     	PageReference pageRef = Page.PositionButtonsVF;
         Test.setCurrentPage(pageRef);
         pageRef.getParameters().put('Id', testPosition.Id);
-        ApexPages.StandardController stdController = new ApexPages.StandardController(testPosition);
-        PositionButtonsController buttonsController = new PositionButtonsController(stdController);
-        
         Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(500, 'ACCESS_TOKEN'));
         
         Test.startTest();
@@ -55,13 +47,9 @@ private class PositionButtonsControllerTest {
     @isTest
     static void testPostButtonNoToken(){
         Position__c testPosition = insertPosition();
-
     	PageReference pageRef = Page.PositionButtonsVF;
         Test.setCurrentPage(pageRef);
-        pageRef.getParameters().put('Id', testPosition.Id);
-        ApexPages.StandardController stdController = new ApexPages.StandardController(testPosition);
-        PositionButtonsController buttonsController = new PositionButtonsController(stdController);
-        
+        pageRef.getParameters().put('Id', testPosition.Id); 
         Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(200, 'OTHER_WORDS_HERE'));
         
         Test.startTest();
@@ -78,13 +66,9 @@ private class PositionButtonsControllerTest {
     @isTest
     static void testDeleteButton(){
         Position__c testPosition = insertPosition();
-
     	PageReference pageRef = Page.PositionButtonsVF;
         Test.setCurrentPage(pageRef);
         pageRef.getParameters().put('Id', testPosition.Id);
-        ApexPages.StandardController stdController = new ApexPages.StandardController(testPosition);
-        PositionButtonsController buttonsController = new PositionButtonsController(stdController);
-        
         Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(200, 'ACCESS_TOKEN'));
         
         Test.startTest();
@@ -100,13 +84,9 @@ private class PositionButtonsControllerTest {
     @isTest
     static void testDeleteButtonNot200(){
         Position__c testPosition = insertPosition();
-
     	PageReference pageRef = Page.PositionButtonsVF;
         Test.setCurrentPage(pageRef);
-        pageRef.getParameters().put('Id', testPosition.Id);
-        ApexPages.StandardController stdController = new ApexPages.StandardController(testPosition);
-        PositionButtonsController buttonsController = new PositionButtonsController(stdController);
-        
+        pageRef.getParameters().put('Id', testPosition.Id);    
         Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(500, 'ACCESS_TOKEN'));
         
         Test.startTest();
@@ -121,13 +101,9 @@ private class PositionButtonsControllerTest {
     @isTest
     static void testDeleteButtonNoToken(){
         Position__c testPosition = insertPosition();
-
     	PageReference pageRef = Page.PositionButtonsVF;
         Test.setCurrentPage(pageRef);
         pageRef.getParameters().put('Id', testPosition.Id);
-        ApexPages.StandardController stdController = new ApexPages.StandardController(testPosition);
-        PositionButtonsController buttonsController = new PositionButtonsController(stdController);
-        
         Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(200, 'OTHER_WORDS_HERE'));
         
         Test.startTest();
@@ -144,13 +120,9 @@ private class PositionButtonsControllerTest {
     @isTest
     static void testPutButton(){
         Position__c testPosition = insertPosition();
-
     	PageReference pageRef = Page.PositionButtonsVF;
         Test.setCurrentPage(pageRef);
         pageRef.getParameters().put('Id', testPosition.Id);
-        ApexPages.StandardController stdController = new ApexPages.StandardController(testPosition);
-        PositionButtonsController buttonsController = new PositionButtonsController(stdController);
-        
         Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(200, 'ACCESS_TOKEN'));
         
         Test.startTest();
@@ -165,13 +137,9 @@ private class PositionButtonsControllerTest {
     @isTest
     static void testPutButtonNot200(){
         Position__c testPosition = insertPosition();
-
     	PageReference pageRef = Page.PositionButtonsVF;
         Test.setCurrentPage(pageRef);
         pageRef.getParameters().put('Id', testPosition.Id);
-        ApexPages.StandardController stdController = new ApexPages.StandardController(testPosition);
-        PositionButtonsController buttonsController = new PositionButtonsController(stdController);
-        
         Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(500, 'ACCESS_TOKEN'));
         
         Test.startTest();
@@ -185,13 +153,9 @@ private class PositionButtonsControllerTest {
     @isTest
     static void testPutButtonNoToken(){
         Position__c testPosition = insertPosition();
-
     	PageReference pageRef = Page.PositionButtonsVF;
         Test.setCurrentPage(pageRef);
-        pageRef.getParameters().put('Id', testPosition.Id);
-        ApexPages.StandardController stdController = new ApexPages.StandardController(testPosition);
-        PositionButtonsController buttonsController = new PositionButtonsController(stdController);
-        
+        pageRef.getParameters().put('Id', testPosition.Id); 
         Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(200, 'OTHER_WORDS_HERE'));
         
         Test.startTest();
