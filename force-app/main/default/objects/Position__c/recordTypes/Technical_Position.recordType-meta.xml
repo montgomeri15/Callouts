@@ -155,7 +155,7 @@
         <picklist>Post_Status__c</picklist>
         <values>
             <fullName>Not posted</fullName>
-            <default>false</default>
+            <default>true</default>
         </values>
         <values>
             <fullName>Posted</fullName>

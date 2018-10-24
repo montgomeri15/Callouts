@@ -8,11 +8,7 @@ public class PositionButtonsController {
     public static String errorResultMessage{get;set;}
     
     public PositionButtonsController(ApexPages.StandardController controller){
-        if(position.Post_Status__c == null){
-            positionStatus = 'Not posted';
-        } else{
-            positionStatus = position.Post_Status__c;
-        }
+        positionStatus = position.Post_Status__c;
     }
     
     public static void postJobAdvertisement(){

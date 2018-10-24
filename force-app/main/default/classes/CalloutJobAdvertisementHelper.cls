@@ -1,10 +1,6 @@
 public class CalloutJobAdvertisementHelper {
     public class HelperResponseException extends Exception {}
     
-    public class OAuth2{
- 		public String ACCESS_TOKEN{get;set;}
-	}
-    
     public static String generateJSON(Position__c pos){
 		Map<String, String> fieldMap = new Map<String, String>{
 			'Status__c' => 'Archived'
@@ -18,7 +14,7 @@ public class CalloutJobAdvertisementHelper {
         Http ourHttp = new Http();
         HttpRequest requestForToken = CalloutJobAdvertisement.createRequestForToken('GET');
     	HttpResponse responseToken = ourHttp.send(requestForToken);
-        OAuth2 objAuthenticationInfo = (OAuth2)JSON.deserialize(responseToken.getbody(), OAuth2.class);
+        CalloutJobAdvertisement.OAuth2 objAuthenticationInfo = (CalloutJobAdvertisement.OAuth2)JSON.deserialize(responseToken.getbody(), CalloutJobAdvertisement.OAuth2.class);
 
 		if(objAuthenticationInfo.ACCESS_TOKEN != null){
             Position__c ourPosition = [SELECT Id, Name, Status__c
