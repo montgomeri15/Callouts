@@ -1,0 +1,53 @@
+<apex:page standardController="Candidate__c" extensions="FileUploaderController" renderAs="pdf">
+    <head>
+        <style> 
+            body { font-family: 'Arial Unicode MS'; }
+            .companyName { font: bold 30px; color: red; }  
+        </style>
+    </head>
+    
+    <body>
+        <center>
+        <h1>Candidate {!Candidate__c.Name}</h1>
+        </center>
+        <hr/>
+        <br/>
+        
+        <div style="text-align:center;">
+              <apex:image url="{!$Site.BaseUrl}/sfc/servlet.shepherd/version/download/{!Candidate__c.Photo__c}" height="150" />
+        </div>
+        
+        <apex:panelGrid columns="1" width="100%">
+            
+        <h2>Information:</h2>
+            <apex:outputText value="Candidate Number: {!Candidate__c.Name}" styleClass="companyName"/>
+            <apex:outputText value="Owner ID: {!Candidate__c.OwnerId}" styleClass="companyName"/>
+        <br/>
+        
+        <h2>Contact Information:</h2>
+            <apex:outputText value="Legacy Candidate Number: {!Candidate__c.Legacy_Candidate_Number__c}" styleClass="companyName"/>
+            <apex:outputText value="First Name: {!Candidate__c.First_Name__c}" styleClass="companyName"/>
+            <apex:outputText value="Last Name: {!Candidate__c.Last_Name__c}" styleClass="companyName"/>
+            <apex:outputText value="Email: {!Candidate__c.Email__c}" styleClass="companyName"/>
+            <apex:outputText value="Mobile: {!Candidate__c.Mobile__c}" styleClass="companyName"/>
+            <apex:outputText value="Phone: {!Candidate__c.Phone__c}" styleClass="companyName"/>
+            <apex:outputText value="Street Address 1: {!Candidate__c.Street_Address_1__c}" styleClass="companyName"/>
+            <apex:outputText value="Street Address 2: {!Candidate__c.Street_Address_2__c}" styleClass="companyName"/>
+            <apex:outputText value="City: {!Candidate__c.City__c}" styleClass="companyName"/>
+            <apex:outputText value="State/Province: {!Candidate__c.State_Province__c}" styleClass="companyName"/>
+            <apex:outputText value="Zip/Postal Code: {!Candidate__c.Zip_Postal_Code__c}" styleClass="companyName"/>
+            <apex:outputText value="Country: {!Candidate__c.Country__c}" styleClass="companyName"/>
+        <br/>
+        
+        <h2>Experience and Education:</h2>
+            <apex:outputText value="Currently Employed: {!Candidate__c.Currently_Employed__c}" styleClass="companyName"/>
+            <apex:outputText value="Current Employer: {!Candidate__c.Current_Employer__c}" styleClass="companyName"/>
+            <apex:outputText value="Education: {!Candidate__c.Education__c}" styleClass="companyName"/>
+            <apex:outputText value="Years of Experience: {!Candidate__c.Years_of_Experience__c}" styleClass="companyName"/>
+        <hr/>
+        
+            <apex:outputText value="{!NOW()}" />
+        </apex:panelGrid>
+        
+    </body>
+</apex:page>
