@@ -1,5 +1,6 @@
 @isTest
 global class CalloutJobAdvertisementMock implements HttpCalloutMock {
+    CalloutResumeRecordsForMock calloutResumeRecords = new CalloutResumeRecordsForMock();
     
     Integer statusCode;
     String token;
@@ -17,7 +18,9 @@ global class CalloutJobAdvertisementMock implements HttpCalloutMock {
     	String serialized;
     	if(request.getEndpoint().contains('services/oauth2/token')) {
       		serialized = '{"'+ token +'":"FAKE-ACCESS-TOKEN"}';
-    	} else{
+        } else if(request.getEndpoint().contains('resumeEndpoint')){
+            serialized = calloutResumeRecords.getRecordsInString();
+        } else{
       		serialized = '{"Name":"OurName", "Position_ID__c":"'+ externalId +'"}';
     	}
     	response.setBody(serialized);

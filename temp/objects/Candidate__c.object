@@ -63,6 +63,27 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
+        <fullName>Additional_Info__c</fullName>
+        <externalId>false</externalId>
+        <label>Additional Info</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Age__c</fullName>
+        <externalId>false</externalId>
+        <label>Age</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>City__c</fullName>
         <externalId>false</externalId>
         <label>City</label>
@@ -156,13 +177,13 @@
     </fields>
     <fields>
         <fullName>Email__c</fullName>
-        <externalId>false</externalId>
+        <externalId>true</externalId>
         <label>Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackTrending>false</trackTrending>
         <type>Email</type>
-        <unique>false</unique>
+        <unique>true</unique>
     </fields>
     <fields>
         <fullName>First_Name__c</fullName>
@@ -199,15 +220,6 @@
         <unique>true</unique>
     </fields>
     <fields>
-        <fullName>Mobile__c</fullName>
-        <externalId>false</externalId>
-        <label>Mobile</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackTrending>false</trackTrending>
-        <type>Phone</type>
-    </fields>
-    <fields>
         <fullName>Phone__c</fullName>
         <externalId>false</externalId>
         <label>Phone</label>
@@ -215,6 +227,38 @@
         <trackFeedHistory>false</trackFeedHistory>
         <trackTrending>false</trackTrending>
         <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Photo_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>Photo Code</label>
+        <length>131072</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Photo_PathOnClient__c</fullName>
+        <externalId>false</externalId>
+        <label>Photo PathOnClient</label>
+        <length>150</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Photo_Title__c</fullName>
+        <externalId>false</externalId>
+        <label>Photo Title</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Photo__c</fullName>
@@ -228,6 +272,27 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Position_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Position ID</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Salary__c</fullName>
+        <externalId>false</externalId>
+        <label>Salary</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
         <fullName>State_Province__c</fullName>
         <externalId>false</externalId>
         <label>State/Province</label>
@@ -237,6 +302,31 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Employed</fullName>
+                    <default>false</default>
+                    <label>Employed</label>
+                </value>
+                <value>
+                    <fullName>Unemployed</fullName>
+                    <default>false</default>
+                    <label>Unemployed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Street_Address_1__c</fullName>
@@ -286,7 +376,13 @@
     <label>Candidate</label>
     <listViews>
         <fullName>All</fullName>
+        <columns>NAME</columns>
         <filterScope>Everything</filterScope>
+        <filters>
+            <field>Email__c</field>
+            <operation>equals</operation>
+            <value>bla2@bla.com</value>
+        </filters>
         <label>All</label>
     </listViews>
     <nameField>

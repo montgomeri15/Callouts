@@ -8,13 +8,6 @@
         <value>Access Token is null</value>
     </labels>
     <labels>
-        <fullName>Delete_Button</fullName>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Delete Button</shortDescription>
-        <value>Delete</value>
-    </labels>
-    <labels>
         <fullName>Delete_JobAdv_Success_Result_Message</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -22,25 +15,32 @@
         <value>Job Advertisement deleted successfully. If you want to work with this record just post a new advertisement.</value>
     </labels>
     <labels>
-        <fullName>Error_Extension</fullName>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Error Extension</shortDescription>
-        <value>The selected file is not an image. Please select an image.</value>
-    </labels>
-    <labels>
-        <fullName>Error_No_File</fullName>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Error No File</shortDescription>
-        <value>Please, choose the file!</value>
-    </labels>
-    <labels>
         <fullName>Extend_an_Offer</fullName>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Extend an Offer</shortDescription>
         <value>Extend an Offer</value>
+    </labels>
+    <labels>
+        <fullName>File_invalid_format</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>File invalid format</shortDescription>
+        <value>Invalid file format. Please upload files in .jpg, .jpeg, .png formats.</value>
+    </labels>
+    <labels>
+        <fullName>File_is_null</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>File is null</shortDescription>
+        <value>Please select a file.</value>
+    </labels>
+    <labels>
+        <fullName>File_is_too_big</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>File is too big</shortDescription>
+        <value>This file is too big. Please upload a file up to 100 Kb.</value>
     </labels>
     <labels>
         <fullName>Item_already_exists</fullName>
@@ -104,12 +104,5 @@
         <protected>true</protected>
         <shortDescription>Update JobAdv Success Result Message</shortDescription>
         <value>Job Advertisement updated successfully. All changes in the Position transferred to this advertisement.</value>
-    </labels>
-    <labels>
-        <fullName>Upload_Button</fullName>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Upload Button</shortDescription>
-        <value>Upload</value>
     </labels>
 </CustomLabels>

@@ -25,7 +25,7 @@ private class CalloutJobAdvertisementTest {
  		Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(200, 'ACCESS_TOKEN', ''));
         
         Test.startTest();
-  		HttpResponse response = CalloutJobAdvertisement.getCalloutResponseContents();
+  			HttpResponse response = CalloutJobAdvertisement.getCalloutResponseContents();
         Test.stopTest();
         
  		String contentType = response.getHeader('Content-Type');
@@ -46,7 +46,7 @@ private class CalloutJobAdvertisementTest {
         
  		try {
             Test.startTest();
-  			response = CalloutJobAdvertisement.getCalloutResponseContents();
+  				response = CalloutJobAdvertisement.getCalloutResponseContents();
             Test.stopTest();
 		} catch(CalloutJobAdvertisement.ResponseException e) {
             System.debug('ERROR 200:   ' + e);
@@ -63,7 +63,7 @@ private class CalloutJobAdvertisementTest {
         
  		try {
             Test.startTest();
-  			response = CalloutJobAdvertisement.getCalloutResponseContents();
+  				response = CalloutJobAdvertisement.getCalloutResponseContents();
             Test.stopTest();
             System.assertEquals(200, response.getStatusCode());
 		} catch(CalloutJobAdvertisement.ResponseException e) {
@@ -82,7 +82,7 @@ private class CalloutJobAdvertisementTest {
  		Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(200, 'ACCESS_TOKEN', ''));
         
         Test.startTest();
- 		HttpResponse response = CalloutJobAdvertisement.postCalloutResponseContents(testPosition.Id);
+ 			HttpResponse response = CalloutJobAdvertisement.postCalloutResponseContents(testPosition.Id);
         Test.stopTest();
         
  		String contentType = response.getHeader('Content-Type');
@@ -104,7 +104,7 @@ private class CalloutJobAdvertisementTest {
         
  		try {
             Test.startTest();
-  			response = CalloutJobAdvertisement.postCalloutResponseContents(testPosition.Id);
+  				response = CalloutJobAdvertisement.postCalloutResponseContents(testPosition.Id);
             Test.stopTest();
             System.assertEquals(500, response.getStatusCode());
 		} catch(CalloutJobAdvertisement.ResponseException e) {
@@ -123,30 +123,13 @@ private class CalloutJobAdvertisementTest {
         
  		try {
             Test.startTest();
-  			response = CalloutJobAdvertisement.postCalloutResponseContents(testPosition.Id);
+  				response = CalloutJobAdvertisement.postCalloutResponseContents(testPosition.Id);
             Test.stopTest();
             System.assertEquals(200, response.getStatusCode());
 		} catch(CalloutJobAdvertisement.ResponseException e) {
             System.debug('TOKEN ERROR:   ' + e);
             System.assertEquals(response, null);
             System.assertEquals(System.Label.Access_Token_is_null, e.getMessage());
-		}
-	}
-    
-    static void testPostCalloutExistsAlready() {         
-        String request = insertAccessTokenBody();
-        Position__c testPosition = insertPosition();
-        HttpResponse response;
- 		Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(200, 'ACCESS_TOKEN', testPosition.Id));
-        
- 		try {
-            Test.startTest();
-  			response = CalloutJobAdvertisement.postCalloutResponseContents(testPosition.Id);
-            Test.stopTest();
-            System.assertEquals(200, response.getStatusCode());
-		} catch(CalloutJobAdvertisement.ResponseException e) {
-            System.assertEquals(response, null);
-            System.assertEquals(System.Label.Item_already_exists, e.getMessage());
 		}
 	}
     
@@ -159,7 +142,7 @@ private class CalloutJobAdvertisementTest {
  		Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(200, 'ACCESS_TOKEN', testPosition.Id));
         
         Test.startTest();
- 		HttpResponse response = CalloutJobAdvertisement.deleteCalloutResponseContents(testPosition.Id);
+ 			HttpResponse response = CalloutJobAdvertisement.deleteCalloutResponseContents(testPosition.Id);
         Test.stopTest();
         
  		String contentType = response.getHeader('Content-Type');
@@ -181,7 +164,7 @@ private class CalloutJobAdvertisementTest {
         
  		try {
             Test.startTest(); 
-  			response = CalloutJobAdvertisement.deleteCalloutResponseContents(testPosition.Id);
+  				response = CalloutJobAdvertisement.deleteCalloutResponseContents(testPosition.Id);
             Test.stopTest();
             System.assertEquals(500, response.getStatusCode());
 		} catch(CalloutJobAdvertisement.ResponseException e) {
@@ -200,7 +183,7 @@ private class CalloutJobAdvertisementTest {
         
  		try {
             Test.startTest();
-  			response = CalloutJobAdvertisement.deleteCalloutResponseContents(testPosition.Id);
+  				response = CalloutJobAdvertisement.deleteCalloutResponseContents(testPosition.Id);
             Test.stopTest();
             System.assertEquals(200, response.getStatusCode());
 		} catch(CalloutJobAdvertisement.ResponseException e) {
@@ -208,25 +191,6 @@ private class CalloutJobAdvertisementTest {
             System.assertEquals(response, null);
             System.assertEquals(System.Label.Access_Token_is_null, e.getMessage());
 		} 
-	}
-    
-    @isTest
-    static void testDeleteCalloutDoesNotExists() {         
-        String request = insertAccessTokenBody();
-        Position__c testPosition = insertPosition();
-        HttpResponse response;
- 		Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(200, 'ACCESS_TOKEN', 'Something'));
-        
- 		try {
-            Test.startTest(); 
-  			response = CalloutJobAdvertisement.deleteCalloutResponseContents(testPosition.Id);
-            Test.stopTest();
-            System.assertEquals(200, response.getStatusCode());
-		} catch(CalloutJobAdvertisement.ResponseException e) {
-            System.debug('ERROR 200:   ' + e);
-            System.assertEquals(response, null);
-            System.assertEquals(System.Label.Item_does_not_exists, e.getMessage());
-		}
 	}
     
     //PUT
@@ -238,7 +202,7 @@ private class CalloutJobAdvertisementTest {
  		Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(200, 'ACCESS_TOKEN', testPosition.Id));
         
         Test.startTest(); 
- 		HttpResponse response = CalloutJobAdvertisement.putCalloutResponseContents(testPosition.Id);
+ 			HttpResponse response = CalloutJobAdvertisement.putCalloutResponseContents(testPosition.Id);
         Test.stopTest();
         
  		String contentType = response.getHeader('Content-Type');
@@ -260,7 +224,7 @@ private class CalloutJobAdvertisementTest {
         
  		try {
             Test.startTest(); 
-  			response = CalloutJobAdvertisement.putCalloutResponseContents(testPosition.Id);
+  				response = CalloutJobAdvertisement.putCalloutResponseContents(testPosition.Id);
             Test.stopTest();
             System.assertEquals(500, response.getStatusCode());
 		} catch(CalloutJobAdvertisement.ResponseException e) {
@@ -279,32 +243,13 @@ private class CalloutJobAdvertisementTest {
         
  		try {
             Test.startTest();
-  			response = CalloutJobAdvertisement.putCalloutResponseContents(testPosition.Id);
+  				response = CalloutJobAdvertisement.putCalloutResponseContents(testPosition.Id);
             Test.stopTest();
             System.assertEquals(200, response.getStatusCode());
 		} catch(CalloutJobAdvertisement.ResponseException e) {
             System.debug('TOKEN ERROR:   ' + e);
             System.assertEquals(response, null);
             System.assertEquals(System.Label.Access_Token_is_null, e.getMessage());
-		}
-	}
-    
-    @isTest
-    static void testPutCalloutDoesNotExists() {         
-        String request = insertAccessTokenBody();
-        Position__c testPosition = insertPosition();
-        HttpResponse response;
- 		Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(200, 'ACCESS_TOKEN', 'Something'));
-        
- 		try {
-            Test.startTest(); 
-  			response = CalloutJobAdvertisement.putCalloutResponseContents(testPosition.Id);
-            Test.stopTest();
-            System.assertEquals(200, response.getStatusCode());
-		} catch(CalloutJobAdvertisement.ResponseException e) {
-            System.debug('ERROR 200:   ' + e);
-            System.assertEquals(response, null);
-            System.assertEquals(System.Label.Item_does_not_exists, e.getMessage());
 		}
 	}
     
@@ -319,10 +264,23 @@ private class CalloutJobAdvertisementTest {
         Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(200, 'ACCESS_TOKEN', testPosition.Id));
         
         Test.startTest();
-        CalloutJobAdvertisementHelper.changeStatusCallout(testPosition.Id);
+        	CalloutJobAdvertisementHelper.changeStatusCallout(testPosition.Id, JSON.serialize(testPosition));
         Test.stopTest();
-        System.assertEquals(1, Limits.getFutureCalls());//Методы Limits возвращают конкретный предел, напр. кол-во вызовов метода.
-        												//getFutureCalls() возвращает количество future-методов, которые были выполнены (не обязательно завершены). 
+        System.assertEquals(1, Limits.getFutureCalls());  //Методы Limits возвращают конкретный предел, напр. кол-во вызовов метода.
+        												  //getFutureCalls() возвращает количество future-методов, которые были выполнены (не обязательно завершены). 
+    }
+    
+    @isTest
+    static void testDeletePositionTrigger() {
+        String request = insertAccessTokenBody();
+        Position__c testPosition = insertPosition();
+        delete testPosition;
+        Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(200, 'ACCESS_TOKEN', testPosition.Id));
+        
+        Test.startTest();
+        	CalloutJobAdvertisementHelper.changeStatusCallout(testPosition.Id, JSON.serialize(testPosition));
+        Test.stopTest();
+        System.assertEquals(1, Limits.getFutureCalls()); 
     }
     
     @isTest
@@ -335,7 +293,7 @@ private class CalloutJobAdvertisementTest {
         
         try {
             Test.startTest();
-  			CalloutJobAdvertisementHelper.changeStatusCallout(testPosition.Id);
+  				CalloutJobAdvertisementHelper.changeStatusCallout(testPosition.Id, JSON.serialize(testPosition));
             Test.stopTest();
 		} catch(CalloutJobAdvertisementHelper.HelperResponseException e) {
             System.debug('ERROR 200:   ' + e);
@@ -354,7 +312,7 @@ private class CalloutJobAdvertisementTest {
         
         try {
             Test.startTest();
-  			CalloutJobAdvertisementHelper.changeStatusCallout(testPosition.Id);
+  				CalloutJobAdvertisementHelper.changeStatusCallout(testPosition.Id, JSON.serialize(testPosition));
             Test.stopTest();
 		} catch(CalloutJobAdvertisementHelper.HelperResponseException e) {
             System.debug('TOKEN ERROR:   ' + e);
@@ -372,7 +330,7 @@ private class CalloutJobAdvertisementTest {
         Test.setMock(HttpCalloutMock.class, new CalloutJobAdvertisementMock(200, 'ACCESS_TOKEN', testPosition.Id));
         
         Test.startTest();
-        CalloutJobAdvertisementHelper.changeStatusCallout(testPosition.Id);
+        	CalloutJobAdvertisementHelper.changeStatusCallout(testPosition.Id, JSON.serialize(testPosition));
         Test.stopTest();
         System.assertEquals(0, Limits.getFutureCalls());
     }

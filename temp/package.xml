@@ -2,27 +2,37 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Callouts</fullName>
     <types>
+        <members>BatchResume</members>
         <members>CalloutJobAdvertisement</members>
         <members>CalloutJobAdvertisementHelper</members>
         <members>CalloutJobAdvertisementMock</members>
         <members>CalloutJobAdvertisementTest</members>
+        <members>CalloutResume</members>
+        <members>CalloutResumeJunction</members>
+        <members>CalloutResumeRecordsForMock</members>
+        <members>CalloutResumeTest</members>
+        <members>EmailServices</members>
         <members>FileUploaderController</members>
+        <members>JobAdvertisementController</members>
         <members>JobApplicationHelper</members>
         <members>PositionButtonsController</members>
         <members>PositionButtonsControllerTest</members>
         <members>PositionHelper</members>
+        <members>RequestClass</members>
+        <members>ScheduleResume</members>
         <members>aws_PositionHelper</members>
         <name>ApexClass</name>
     </types>
     <types>
         <members>CandidatePdfPage</members>
+        <members>FileUploaderVF</members>
         <members>PositionButtonsVF</members>
-        <members>UploadCandidatePhotoVF</members>
         <name>ApexPage</name>
     </types>
     <types>
         <members>CalloutJobAdvertisementTrigger</members>
         <members>JobApplicationTrigger</members>
+        <members>JobApplicationsCreatingTrigger</members>
         <members>PositionTrigger</members>
         <members>aws_PositionAfterInsert</members>
         <name>ApexTrigger</name>
@@ -40,6 +50,9 @@
         <name>CustomApplication</name>
     </types>
     <types>
+        <members>Activity.DB_Activity_Type__c</members>
+        <members>Candidate__c.Additional_Info__c</members>
+        <members>Candidate__c.Age__c</members>
         <members>Candidate__c.City__c</members>
         <members>Candidate__c.Country__c</members>
         <members>Candidate__c.Current_Employer__c</members>
@@ -49,10 +62,15 @@
         <members>Candidate__c.First_Name__c</members>
         <members>Candidate__c.Last_Name__c</members>
         <members>Candidate__c.Legacy_Candidate_Number__c</members>
-        <members>Candidate__c.Mobile__c</members>
         <members>Candidate__c.Phone__c</members>
+        <members>Candidate__c.Photo_Code__c</members>
+        <members>Candidate__c.Photo_PathOnClient__c</members>
+        <members>Candidate__c.Photo_Title__c</members>
         <members>Candidate__c.Photo__c</members>
+        <members>Candidate__c.Position_ID__c</members>
+        <members>Candidate__c.Salary__c</members>
         <members>Candidate__c.State_Province__c</members>
+        <members>Candidate__c.Status__c</members>
         <members>Candidate__c.Street_Address_1__c</members>
         <members>Candidate__c.Street_Address_2__c</members>
         <members>Candidate__c.Years_of_Experience__c</members>
@@ -62,7 +80,7 @@
         <members>Interviewer__c.Position__c</members>
         <members>Job_Application__c.Average_Review_Score__c</members>
         <members>Job_Application__c.Candidate__c</members>
-        <members>Job_Application__c.Legacy_Job_Application_Number__c</members>
+        <members>Job_Application__c.ExternalID__c</members>
         <members>Job_Application__c.Number_of_Reviews__c</members>
         <members>Job_Application__c.Position__c</members>
         <members>Job_Application__c.Review_Indicator__c</members>
@@ -119,11 +137,11 @@
     </types>
     <types>
         <members>Access_Token_is_null</members>
-        <members>Delete_Button</members>
         <members>Delete_JobAdv_Success_Result_Message</members>
-        <members>Error_Extension</members>
-        <members>Error_No_File</members>
         <members>Extend_an_Offer</members>
+        <members>File_invalid_format</members>
+        <members>File_is_null</members>
+        <members>File_is_too_big</members>
         <members>Item_already_exists</members>
         <members>Item_does_not_exists</members>
         <members>Post_Application_to_Site</members>
@@ -133,8 +151,11 @@
         <members>Status_code_is_not_200</members>
         <members>Update_Application</members>
         <members>Update_JobAdv_Success_Result_Message</members>
-        <members>Upload_Button</members>
         <name>CustomLabel</name>
+    </types>
+    <types>
+        <members>CustomLabels</members>
+        <name>CustomLabels</name>
     </types>
     <types>
         <members>Candidate__c</members>
@@ -194,6 +215,7 @@
         <name>ListView</name>
     </types>
     <types>
+        <members>Callouts_Perm_Set</members>
         <members>HR</members>
         <members>Hiring_Manager</members>
         <members>Recruiting</members>
