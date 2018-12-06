@@ -14,7 +14,7 @@
         <br/>
         
         <div style="text-align:center;">
-              <apex:image url="{!$Site.BaseUrl}/sfc/servlet.shepherd/version/download/{!Candidate__c.Photo__c}" height="150px" />
+              <apex:image url="{!$Site.BaseUrl}/sfc/servlet.shepherd/version/download/{!currentContentVersion}" height="150px" />
         </div>
         
         <apex:panelGrid columns="1" width="100%">

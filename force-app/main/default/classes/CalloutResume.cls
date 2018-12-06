@@ -36,7 +36,6 @@ public class CalloutResume {
     
     public void insertCurrentContentVersion(){
         List<Id> temporaryDeleteFilesList = new List<Id>();
-        List<Candidate__c> temporaryInsertCandidateList = new List<Candidate__c>();
         List<ContentVersion> currentContentVersionList = new List<ContentVersion>();
         
         for(Candidate__c temporaryCandidate : candidatesList) {
@@ -49,30 +48,14 @@ public class CalloutResume {
             		VersionData = EncodingUtil.base64Decode(temporaryCandidate.Photo_Code__c),
             		FirstPublishLocationId = temporaryCandidate.Id
                 );
+                temporaryCandidate.Photo_Code__c = null;
                 currentContentVersionList.add(currentContentVersion);
             }
         }
         deletePreviousFiles(temporaryDeleteFilesList);
         
-        try{
+        try{  
         	insert currentContentVersionList;
-        } catch(QueryException e){
-            throw new ResponseException(e.getMessage());
-        }
-                
-        for(Candidate__c temporaryCandidate2 : candidatesList) {
-        	
-        
-            	if(temporaryCandidate2.Photo_Code__c != null) {
-                	temporaryCandidate2.Photo__c = [SELECT Id FROM ContentVersion WHERE FirstPublishLocationId =: temporaryCandidate2.Id].Id;
-                	temporaryCandidate2.Photo_Code__c = null;
-                	temporaryInsertCandidateList.add(temporaryCandidate2);
-            	
-        	}
-        }
-        
-        try{
-        	update temporaryInsertCandidateList;
         } catch(QueryException e){
             throw new ResponseException(e.getMessage());
         }
@@ -90,7 +73,6 @@ public class CalloutResume {
                 throw new ResponseException(e.getMessage());
             }
         }
-        
         try{
             delete contentDocumentList;
         } catch(Exception e){

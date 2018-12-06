@@ -8,12 +8,10 @@
         <members>CalloutJobAdvertisementMock</members>
         <members>CalloutJobAdvertisementTest</members>
         <members>CalloutResume</members>
-        <members>CalloutResumeJunction</members>
         <members>CalloutResumeRecordsForMock</members>
         <members>CalloutResumeTest</members>
         <members>EmailServices</members>
         <members>FileUploaderController</members>
-        <members>JobAdvertisementController</members>
         <members>JobApplicationHelper</members>
         <members>PositionButtonsController</members>
         <members>PositionButtonsControllerTest</members>

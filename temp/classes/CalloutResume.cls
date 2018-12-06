@@ -61,8 +61,6 @@ public class CalloutResume {
         }
                 
         for(Candidate__c temporaryCandidate2 : candidatesList) {
-        	
-        
             	if(temporaryCandidate2.Photo_Code__c != null) {
                 	temporaryCandidate2.Photo__c = [SELECT Id FROM ContentVersion WHERE FirstPublishLocationId =: temporaryCandidate2.Id].Id;
                 	temporaryCandidate2.Photo_Code__c = null;

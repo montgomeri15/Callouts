@@ -11,7 +11,7 @@
                 </apex:pageBlockSectionItem>
                 <apex:pageBlockSectionItem >
             		<apex:outputText value="Current photo:   " />
-            		<apex:image style="margin: 10px;" url="{!$Site.BaseUrl}/sfc/servlet.shepherd/version/download/{!Candidate__c.Photo__c}" height="150px"/>
+            		<apex:image style="margin: 10px;" url="{!$Site.BaseUrl}/sfc/servlet.shepherd/version/download/{!currentContentVersion}" height="150px"/>
                 </apex:pageBlockSectionItem>
             </apex:pageBlockSection>
         </apex:pageBlock>

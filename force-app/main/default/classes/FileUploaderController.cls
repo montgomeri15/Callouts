@@ -5,16 +5,19 @@ public class FileUploaderController {
     public String pathOnClient{get;set;}
     public String contentType{get;set;}
     
-    public ContentVersion currentContentVersion;
+    public ContentVersion currentContentVersion{get;set;}
     
-    private static final Integer IMAGE_MAX_SIZE = 100000;
     
+    private static final Integer IMAGE_MAX_SIZE = 50000;
     public Blob versionData{get;set;}
-    
     public Id contentVersionId{get;set;}
    
     public FileUploaderController(ApexPages.StandardController controller){
         thisCandidate = (Candidate__c)controller.getRecord();
+        List<ContentVersion> contentVersionListForLoop = [SELECT Id FROM ContentVersion WHERE FirstPublishLocationId =: thisCandidate.Id];
+        if(!contentVersionListForLoop.isEmpty()){
+            currentContentVersion = [SELECT Id FROM ContentVersion WHERE FirstPublishLocationId =: thisCandidate.Id];
+        }
     }
     
     public PageReference uploadFile() {
@@ -40,8 +43,6 @@ public class FileUploaderController {
         );
         try {
             insert currentContentVersion;
-            thisCandidate.Photo__c = currentContentVersion.Id;
-            update thisCandidate;
         } catch(Exception e) {
             ApexPages.addMessage(new ApexPages.Message(ApexPages.SEVERITY.ERROR, e.getMessage()));
         }

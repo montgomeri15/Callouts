@@ -53,12 +53,12 @@ private class CalloutResumeTest {
         
  		String contentType = response.getHeader('Content-Type');
         String actualValue = response.getBody();
-        //String expectedValue = calloutResumeRecords.getRecordsInString();
+        String expectedValue = calloutResumeRecords.getRecordsInString();
         
         System.assert(contentType == 'application/json');
-    	//System.assertEquals(actualValue, expectedValue);
+    	System.assertEquals(actualValue, expectedValue);
     	System.assertEquals(200, response.getStatusCode());
-        System.assertEquals(candidatesList.size(), 200);
+        System.assertEquals(candidatesList.size(), 500);
         System.assertEquals(contentVersionListTest.get(0).Id, contentVersionList.get(0).Id);
 	}
     
@@ -71,8 +71,8 @@ private class CalloutResumeTest {
         
  		try {
             Test.startTest();
-            candidatesList = calloutResume.getCalloutResponseContents();
-  			response = calloutResume.responseService;
+            	candidatesList = calloutResume.getCalloutResponseContents();
+  				response = calloutResume.responseService;
             Test.stopTest();
 		} catch(calloutResume.ResponseException e) {
             System.assertEquals(response, null);
@@ -90,8 +90,8 @@ private class CalloutResumeTest {
         
  		try {
             Test.startTest();
-  			candidatesList = calloutResume.getCalloutResponseContents();
-  			response = calloutResume.responseService;
+  				candidatesList = calloutResume.getCalloutResponseContents();
+  				response = calloutResume.responseService;
             Test.stopTest();
             System.assertEquals(200, response.getStatusCode());
 		} catch(calloutResume.ResponseException e) {
@@ -100,6 +100,4 @@ private class CalloutResumeTest {
             System.assertEquals(candidatesList, null);
 		}
 	}
-    
-    
 }

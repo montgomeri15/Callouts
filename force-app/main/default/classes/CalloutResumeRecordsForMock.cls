@@ -11,7 +11,7 @@ public class CalloutResumeRecordsForMock {
         String records = '[';
         String forLoop;
         
-        for(Integer i=0; i<199; i++){
+        for(Integer i=0; i<499; i++){
             forLoop = '{"attributes":{"type":"Resume__c","url":"/services/data/v44.0/sobjects/Resume__c/a01f400000Mji'+ i +'AAB"},"First_Name__c":"Name","Last_Name__c":"Last","Age__c":25,'
             + '"Salary__c":3453,"Email__c":"test'+ i +'@gmail.com","Currently_Employed__c":false,"Photo_Code__c":"'+ photoCode +'","Photo_PathOnClient__c":"2015-'+ i +'-15_175403ya.jpg",'
             + '"Position_ID__c":"text someIdsIsHere a0A1r000'+ i +'xSkG2EAK"},';
