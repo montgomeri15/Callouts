@@ -48,7 +48,7 @@ private class CalloutResumeTest {
         	HttpResponse response = calloutResume.responseService;
         	List<ContentVersion> contentVersionList = calloutResume.getContentVersionList(candidateIds);
         	calloutResume.deletePreviousFiles(candidateIds);
-        	Database.executeBatch(new BatchResume(), 1);
+        	Database.executeBatch(new BatchResume(), 1000);
         Test.stopTest();
         
  		String contentType = response.getHeader('Content-Type');
