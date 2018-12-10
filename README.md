@@ -42,6 +42,12 @@ sfdx force:user:permset:assign -n Callouts_Perm_Set
 sfdx force:org:open
 ```
 
+9. Import data (20 test records of Position):
+```
+sfdx force:data:tree:import -f data/20_Positions.json -u myscratchorg
+```
+
+
 
 ### Needed classes - Test's coverage:
 * CalloutJobAdvertisement - 100%
