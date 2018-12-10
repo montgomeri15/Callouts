@@ -50,8 +50,11 @@ sfdx force:org:open
 * RequestClass - 100%
 * CalloutResume - 86%
 * BatchResume - 94%
+* ScheduleResume - 100%
 * CalloutResumeRecordsForMock - 100%
 * FileUploaderController - 93%
+* PositionButtonsController - 97%
 
 ### Needed VF pages:
 * FileUploaderVF
+* PositionButtonsVF
