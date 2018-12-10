@@ -127,11 +127,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Event.DB_Activity_Type__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Interviewer__c.Employee__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -378,11 +373,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Settings__c.Username__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Task.DB_Activity_Type__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>

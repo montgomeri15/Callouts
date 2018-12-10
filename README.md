@@ -1,44 +1,57 @@
-FIRST ORG PROJECT
-===
+# SFDX  App
+## Job Advertisements endpoint, VF pages, controllers and tests
+# Instructions
+1. Open a new Terminal window and use the following command to create a unique directory to do your work in:
+```
+mkdir callouts_project
+cd callouts_project
+```
 
-This is a part of my project and it includes a few tasks:
+2. Use this command to clone the app repository:
+```
+git clone https://github.com/montgomeri15/Callouts.git
+```
 
-**First:**
-*Create a custom endpoint*
+3. Open the directory:
+```
+cd Callouts
+```
 
-**Second:**
-*Create web-services*
+4. If you haven’t already done so, authenticate with your hub org. Type the following command, then login with your hub org credentials and accept to provide access to Salesforce DX:
+```
+sfdx force:auth:web:login -d -a DevHub
+```
 
-You can find here:
----
-**CLASSES:**
-- CalloutJobAdvertisement
-- CalloutJobAdvertisementMock
-- CalloutJobAdvertisementTest
-- PositionButtonsController
+5. Create a new scratch org:
+```
+sfdx force:org:create -s -f config/project-scratch-def.json -a  myscratchorg
+```
 
-**PAGES:**
-- PositionButtonsVF
+6. Push the app to the scratch org:
+```
+sfdx force:source:push
+```
 
-**OBJECTS:**
-- Position__c
-- Settings__c
-- Interviewer__c
+7. Assign the permission set to the default user:
+```
+sfdx force:user:permset:assign -n Callouts_Perm_Set
+```
 
-**LAYOUTS:**
-- Interviewer__c-Interviewer Layout.layout-meta
-- Position__c-Position Layout.layout-meta
-- Position__c-Technical Position Layout.layout-meta
-- Settings__c-Settings Layout.layout-meta
-
-**LABELS:**
-- Delete_JobAdv_Success_Result_Message
-- Post_Application_to_Site
-- Post_JobAdv_Success_Result_Message
-- Remove_Application_from_Site
-- Update_Application
-- Update_JobAdv_Success_Result_Message
----
+8. Open the scratch org:
+```
+sfdx force:org:open
+```
 
 
+### Needed classes - Test's coverage:
+* CalloutJobAdvertisement - 100%
+* CalloutJobAdvertisementTrigger - 81%
+* CalloutJobAdvertisementHelper - 100%
+* RequestClass - 100%
+* CalloutResume - 86%
+* BatchResume - 94%
+* CalloutResumeRecordsForMock - 100%
+* FileUploaderController - 93%
 
+### Needed VF pages:
+* FileUploaderVF
