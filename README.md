@@ -1,5 +1,5 @@
 # SFDX  App
-## Job Advertisements endpoint, VF pages, controllers and tests
+## Callouts, VF pages, controllers and tests
 # Instructions
 1. Open a new Terminal window and use the following command to create a unique directory to do your work in:
 ```
