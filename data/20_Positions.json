@@ -1,0 +1,184 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef1"
+            },
+            "Name": "Sub-Ex",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        },
+        {
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef2"
+            },
+            "Name": "Trippledex",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        },
+        {
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef3"
+            },
+            "Name": "Mat Lam Tam",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        },
+		{
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef4"
+            },
+            "Name": "Engineer",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        },
+		{
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef5"
+            },
+            "Name": "Architect",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        },
+		{
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef6"
+            },
+            "Name": "Doctor",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        },
+		{
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef7"
+            },
+            "Name": "Military",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        },
+		{
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef8"
+            },
+            "Name": "Teacher",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        },
+		{
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef9"
+            },
+            "Name": "Bank employee",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        },
+		{
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef10"
+            },
+            "Name": "Watchman",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        },
+		{
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef11"
+            },
+            "Name": "Worker",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        },
+		{
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef12"
+            },
+            "Name": "Developer Java",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        },
+		{
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef13"
+            },
+            "Name": "Developer C++",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        },
+		{
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef14"
+            },
+            "Name": "Bank employee",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        },
+		{
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef15"
+            },
+            "Name": "Military",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        },
+		{
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef16"
+            },
+            "Name": "Doctor",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        },
+		{
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef17"
+            },
+            "Name": "Architect",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        },
+		{
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef18"
+            },
+            "Name": "Engineer",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        },
+		{
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef19"
+            },
+            "Name": "Teacher",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        },
+		{
+            "attributes": {
+                "type": "Position__c",
+                "referenceId": "Position__cRef20"
+            },
+            "Name": "Zamit",
+            "Status__c": "Open",
+            "Approval_Status__c": "Approved"
+        }	
+    ]
+}
