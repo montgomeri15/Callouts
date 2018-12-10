@@ -61,6 +61,16 @@ sfdx force:data:tree:import -f data/20_Positions.json -u myscratchorg
 * FileUploaderController - 93%
 * PositionButtonsController - 97%
 
+
+### Test classes:
+* CalloutResumeTest
+* CalloutJobAdvertisementMock
+* CalloutJobAdvertisementTest
+* FileUploaderTest
+* ScheduleResumeTest
+* PositionButtonsControllerTest
+
+
 ### Needed VF pages:
 * FileUploaderVF
 * PositionButtonsVF
