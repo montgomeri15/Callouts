@@ -1,0 +1,19 @@
+<apex:page standardController="Candidate__c" extensions="FileUploaderController">
+    <apex:pageMessages />
+    <apex:form >
+        <apex:pageBlock mode="maindetail">
+            <apex:pageBlockSection columns="2">
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel >
+                        <apex:inputFile style="width: 200px" value="{!versionData}" contentType="{!contentType}" title="{!title}" fileName="{!pathOnClient}" accept="image/*" /><br/>
+            			<apex:commandButton style="margin: 10px 0px;" html-data-element-id="upload-image-btn" value="Upload" action="{!uploadFile}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+            		<apex:outputText value="Current photo:   " />
+            		<apex:image style="margin: 10px;" url="{!$Site.BaseUrl}/sfc/servlet.shepherd/version/download/{!currentContentVersion}" height="150px"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
