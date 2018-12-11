@@ -48,7 +48,7 @@ private class CalloutResumeTest {
         	HttpResponse response = calloutResume.responseService;
         	List<ContentVersion> contentVersionList = calloutResume.getContentVersionList(candidateIds);
         	calloutResume.deletePreviousFiles(candidateIds);
-        	Database.executeBatch(new BatchResume(), 1000);
+        	Database.executeBatch(new BatchResume(), 1);
         Test.stopTest();
         
  		String contentType = response.getHeader('Content-Type');
@@ -56,7 +56,7 @@ private class CalloutResumeTest {
         
         System.assert(contentType == 'application/json');
     	System.assertEquals(200, response.getStatusCode());
-        System.assertEquals(candidatesList.size(), 1000);
+        System.assertEquals(candidatesList.size(), 2);
         System.assertEquals(contentVersionListTest.get(0).Id, contentVersionList.get(0).Id);
 	}
     
@@ -74,7 +74,7 @@ private class CalloutResumeTest {
             Test.stopTest();
 		} catch(calloutResume.ResponseException e) {
             System.assertEquals(response, null);
-            System.assertEquals(System.Label.Status_code_is_not_200, e.getMessage());
+            System.assertEquals('Service Error at the Callout level. Status code is not 200', e.getMessage());
             System.assertEquals(candidatesList, null);
 		}
 	}
@@ -94,7 +94,7 @@ private class CalloutResumeTest {
             System.assertEquals(200, response.getStatusCode());
 		} catch(calloutResume.ResponseException e) {
             System.assertEquals(response, null);
-            System.assertEquals(System.Label.Access_Token_is_null, e.getMessage());
+            System.assertEquals('Service Error at the Callout level. Access Token is null', e.getMessage());
             System.assertEquals(candidatesList, null);
 		}
 	}

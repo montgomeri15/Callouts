@@ -24,9 +24,9 @@ public class CalloutResume {
                 }
                 return candidatesList;
             }
-            else throw new ResponseException(System.Label.Status_code_is_not_200);
+            else throw new ResponseException(System.Label.Service_Error_at_the_Callout_level + ' ' + System.Label.Status_code_is_not_200);
         }
-        else throw new ResponseException(System.Label.Access_Token_is_null);
+        else throw new ResponseException(System.Label.Service_Error_at_the_Callout_level + ' ' + System.Label.Access_Token_is_null);
     }
     
     public List<ContentVersion> getContentVersionList(List<Id> candidateId){
@@ -56,41 +56,42 @@ public class CalloutResume {
         
         try{
         	insert currentContentVersionList;
-        } catch(Exception e){
-            throw new ResponseException(e.getMessage());
+        } catch(DMLException e){
+            throw new ResponseException(System.Label.Service_Error_at_the_Callout_level + ' ' + e.getMessage());
         }
                 
-        for(Candidate__c temporaryCandidate2 : candidatesList) {
-            	if(temporaryCandidate2.Photo_Code__c != null) {
-                	temporaryCandidate2.Photo_Code__c = null;
-                	temporaryInsertCandidateList.add(temporaryCandidate2);
+        for(Candidate__c temporaryCandidateForCleaning : candidatesList) {
+            if(temporaryCandidateForCleaning.Photo_Code__c != null) {
+                temporaryCandidateForCleaning.Photo_Code__c = null;
+                temporaryInsertCandidateList.add(temporaryCandidateForCleaning);
         	}
         }
         
         try{
         	update temporaryInsertCandidateList;
-        } catch(Exception e){
-            throw new ResponseException(e.getMessage());
+        } catch(DMLException e){
+            throw new ResponseException(System.Label.Service_Error_at_the_Callout_level + ' ' + e.getMessage());
         }
     }
         
     public void deletePreviousFiles(List<Id> candidateId) {
         List<ContentVersion> contentVersionList = getContentVersionList(candidateId);
         List<ContentDocument> contentDocumentList = new List <ContentDocument>();
+        Set<Id> contentDocumentIdsSet = new Set<Id>();
         
         for(ContentVersion temporaryContentVersion : contentVersionList){
-            try{
-                ContentDocument thisContentDocument = [SELECT Id FROM ContentDocument WHERE Id =: temporaryContentVersion.ContentDocumentId];
-           		contentDocumentList.add(thisContentDocument); 
-            } catch(QueryException e){
-                throw new ResponseException(e.getMessage());
-            }
+            contentDocumentIdsSet.add(temporaryContentVersion.ContentDocumentId);
+        }
+        Map<Id, ContentDocument> contentDocumentsMap = new Map<Id, ContentDocument>([SELECT Id FROM ContentDocument WHERE Id IN : contentDocumentIdsSet]);
+        
+        for(ContentDocument temporaryContentDocument : contentDocumentsMap.values()){
+            contentDocumentList.add(temporaryContentDocument); 
         }
         
         try{
-            delete contentDocumentList;
-        } catch(Exception e){
-            throw new ResponseException(e.getMessage());
-        }
+        	delete contentDocumentList;
+        } catch(DMLException e){
+            throw new ResponseException(System.Label.Service_Error_at_the_Callout_level + ' ' + e.getMessage());
+        } 
     } 
 }
