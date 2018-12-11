@@ -54,8 +54,9 @@ sfdx force:data:tree:import -f data/20_Positions.json -u myscratchorg
 * CalloutJobAdvertisementTrigger - 81%
 * CalloutJobAdvertisementHelper - 100%
 * RequestClass - 100%
-* CalloutResume - 86%
-* BatchResume - 94%
+* CalloutResume - 89%
+* BatchResume - 76%
+* CalloutEmailSending - 100%
 * ScheduleResume - 100%
 * CalloutResumeRecordsForMock - 100%
 * FileUploaderController - 93%
@@ -66,6 +67,7 @@ sfdx force:data:tree:import -f data/20_Positions.json -u myscratchorg
 * CalloutResumeTest
 * CalloutJobAdvertisementMock
 * CalloutJobAdvertisementTest
+* CalloutEmailSendingTest
 * FileUploaderTest
 * ScheduleResumeTest
 * PositionButtonsControllerTest
