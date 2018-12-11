@@ -56,7 +56,7 @@ private class CalloutResumeTest {
         
         System.assert(contentType == 'application/json');
     	System.assertEquals(200, response.getStatusCode());
-        System.assertEquals(candidatesList.size(), 2);
+        System.assertEquals(candidatesList.size(), 1000);
         System.assertEquals(contentVersionListTest.get(0).Id, contentVersionList.get(0).Id);
 	}
     
